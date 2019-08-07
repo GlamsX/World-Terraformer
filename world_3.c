@@ -2,7 +2,7 @@
  * @Author: la-montagne
  * @Date:   2019-07-17T14:24:39+02:00
  * @Last modified by:   la-montagne
- * @Last modified time: 2019-07-17T14:25:07+02:00
+ * @Last modified time: 2019-07-30T16:50:35+02:00
  */
 
 #include "my.h"
@@ -53,10 +53,12 @@ sfVertexArray *create_water(sfVector2f *v, float shade)
 
 void draw_all(sfRenderWindow *window, map_t *maps, int x, int y)
 {
-    sfRenderWindow_drawVertexArray(window, \
-    create_square((sfVector2f[4]){maps->map[x][y], \
-    maps->map[x][y + 1], maps->map[x + 1][y], \
-    maps->map[x + 1][y + 1]}, maps->mapz[x][y], maps->shade), NULL);
+    sfVertexArray *vertt = create_square((sfVector2f[4]){maps->map[x][y],
+    maps->map[x][y + 1], maps->map[x + 1][y],maps->map[x + 1][y + 1]},
+    maps->mapz[x][y], maps->shade);
+
+    sfRenderWindow_drawVertexArray(window, vertt, NULL);
+    free(vertt);
 }
 
 int close_before(FILE *fp, char *str)
